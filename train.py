@@ -33,7 +33,7 @@ flags.DEFINE_string('phase', 'train', 'train or evaluate')
 FLAGS = flags.FLAGS
 
 np.random.seed(123)
-
+tf.debugging.set_log_device_placement(True)
 dhandler = Data_handler(data_version=FLAGS.data_version,
                         data_root=FLAGS.data_root,
                         util_root=FLAGS.util_root,
@@ -647,7 +647,8 @@ def train(state, number):
     run_meta = tf.RunMetadata()
     g = tf.Graph()
     #cuda.select_device(0)
-    with tf.device('/gpu:0'):
+    strategy=tf.distribute.MirrorStratey()
+    with strategy.scope():
         with g.as_default():
 
             limage = tf.placeholder(tf.float32, [None, FLAGS.patch_size, FLAGS.patch_size, num_channels], name='limage')
