@@ -15,8 +15,8 @@ import math
 flags = tf.app.flags
 
 flags.DEFINE_integer('batch_size', 8, 'Batch size.')
-flags.DEFINE_integer('num_iter', 10, 'Total training iterations')
-flags.DEFINE_string('model_dir', 'C:\\Users\\Mohammad\\Desktop\\version6\\temp4', 'Trained network dir')
+flags.DEFINE_integer('num_iter', 10000, 'Total training iterations')
+flags.DEFINE_string('model_dir', 'C:\\Users\\Mohammad\\PycharmProjects\\version6\\ded', 'Trained network dir')
 flags.DEFINE_string('data_version', 'kitti2015', 'kitti2012 or kitti2015')
 flags.DEFINE_string('data_root', 'C:\\Users\\Mohammad\\Downloads\\data_scene_flow\\training', 'training dataset dir')
 flags.DEFINE_string('util_root', 'C:\\Users\\Mohammad\\Downloads\\data_scene_flow', 'Binary training files dir')
@@ -647,9 +647,18 @@ def train(state, number):
     run_meta = tf.RunMetadata()
     g = tf.Graph()
     #cuda.select_device(0)
-    strategy=tf.distribute.MirrorStratey()
+    strategy=tf.distribute.MirroredStrategy()
     with strategy.scope():
         with g.as_default():
+            log=(tf.Session(config=tf.ConfigProto(log_device_placement=True)).list_devices())
+
+            file=open(path+'\\log.txt','a+')
+            file.write(str(log))
+            file.close()
+
+
+
+
 
             limage = tf.placeholder(tf.float32, [None, FLAGS.patch_size, FLAGS.patch_size, num_channels], name='limage')
             rimage = tf.placeholder(tf.float32,
@@ -682,7 +691,7 @@ def train(state, number):
                 _, mini_loss = session.run([train_step, loss], feed_dict=train_dict)
                 losses.append(mini_loss)
 
-                if it % 1 == 0:
+                if it % 10 == 0:
                     print('Loss at step: %d: %.6f' % (it, mini_loss)) #please us me later
                     saver.save(session, os.path.join(path, 'model.ckpt'), global_step=snet['global_step'])
                     train_summary = session.run(loss_summary,
