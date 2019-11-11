@@ -401,7 +401,7 @@ class SimulatedAnnealer(Annealer):
                           ['conv2d', 32, 'same', 11], ['batch', 0, 'none', 0],['conc',0,'none',0],
                           ['none', 0, 'none', 0]]
                 # print(4)
-                x = self.state[0]
+                x = self.state[1]
                 # j=self.state.index(x)
                 '''for z in self.state:
                     if z != x:

@@ -173,7 +173,7 @@ def create_network(state, inputs, is_training, scope="win37_dep9", reuse=False):
                             new_image=tf.image.resize_image_with_crop_or_pad(nets[1],x,y)
                             print(new_image)
                             print(f3)
-                            new_image=slim.conv2d(new_image,nets[0].shape[3],[f3[3],f3[3]],padding='same')
+                            new_image=slim.conv2d(new_image,nets[0].shape[3],[3,3],padding='same')
                             new_image=slim.batch_norm(new_image,is_training=is_training)
                             print(nets[0].shape)
                             print(new_image.shape)
@@ -197,7 +197,7 @@ def create_network(state, inputs, is_training, scope="win37_dep9", reuse=False):
                             y=int(shape[2])
                             #input()
                             new_image = tf.image.resize_image_with_crop_or_pad(nets[0],x,y)
-                            new_image = slim.conv2d(new_image, nets[1].shape[3], [f4[3], f4[3]], padding='same')
+                            new_image = slim.conv2d(new_image, nets[1].shape[3], [3,3], padding='same')
                             new_image = slim.batch_norm(new_image, is_training=is_training)
                             nets[1] = nets[1] + new_image
                         else:
