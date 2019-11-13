@@ -128,7 +128,7 @@ class Data_handler:
                 i = 1
                 self.tr_ptr = -(idx + 1) + 1
                 self.curr_epoch = self.curr_epoch + 1
-                print('....epoch id: ' + self.curr_epoch + ' done ......\n')
+                print('....epoch id: ' + str(self.curr_epoch) + ' done ......\n')
             i -= 1
 
             img_id, loc_type, center_x, center_y, right_center_x = self.tr_loc[self.tr_perm[i]][0], \
