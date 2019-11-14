@@ -796,7 +796,7 @@ if __name__ == '__main__':
              ['none', 0, 'none', 0],
              ['none', 0, 'none', 0]]
             ]'''
-    init=[[['conv2d', 32, 'same', 5],
+    '''init=[[['conv2d', 32, 'same', 5],
            ['conv2d', 64, 'same', 5],
            ['none', 0, 'none', 0],
            ['conv2d', 64, 'same', 5],
@@ -819,7 +819,8 @@ if __name__ == '__main__':
            ['none', 0, 'none', 0],
            ['none', 0, 'none', 0],
            ['none', 0, 'none', 0],
-           ['conv2d', 32, 'valid', 37]]]
+           ['conv2d', 32, 'valid', 37]]]'''
+    init=[[['batch', 0, 'none', 0], ['conv2d', 32, 'valid', 13], ['none', 0, 'none', 0], ['conv2d', 32, 'same', 5], ['conv2d', 64, 'same', 5], ['conv2d', 64, 'valid', 3], ['conv2d', 64, 'same', 5], ['none', 0, 'none', 0], ['conv2d', 32, 'valid', 3], ['none', 0, 'none', 0], ['conv2d', 32, 'valid', 3], ['none', 0, 'none', 0], ['none', 0, 'none', 0], ['conv2d', 32, 'valid', 7], ['batch', 0, 'none', 0], ['conv2d', 32, 'valid', 3], ['conv2d', 32, 'valid', 11]], [['none', 0, 'none', 0], ['none', 0, 'none', 0], ['none', 0, 'none', 0], ['none', 0, 'none', 0], ['none', 0, 'none', 0], ['none', 0, 'none', 0], ['none', 0, 'none', 0], ['none', 0, 'none', 0], ['none', 0, 'none', 0], ['none', 0, 'none', 0], ['none', 0, 'none', 0], ['conv2d', 32, 'valid', 37]]]
     tsp = SimulatedAnnealer(init)
     #print('///////////////////////////////////////////////////////////////')
     tsp.set_schedule(tsp.auto(0.01,10))
